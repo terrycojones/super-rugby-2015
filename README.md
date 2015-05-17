@@ -29,9 +29,10 @@ might first appear.
 
 ## Results
 
-This repo contains a results file (`results.txt`) and a Python program to
-print some stats. The output (as of 2015-05-17, following Round 14) is
-shown below:
+This repo contains a results file and a Python program to print some
+stats.  *Note: Neither has been fully checked for accuracy yet!*
+
+The output (as of 2015-05-17, following Round 14) is shown below:
 
 ```
 TEAMS

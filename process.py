@@ -207,7 +207,7 @@ class Results:
     def printGroups(self):
         for groupName in sorted(GROUPS):
             group = self.groups[groupName]
-            print('%-*s teams:' % (MAX_GROUP_LEN, groupName))
+            print('\n%-*s teams:' % (MAX_GROUP_LEN, groupName))
             print('  %2d games played (%2d vs other groups, %2d within '
                   'group)' % (group.played + group.playedWithin,
                               group.played, group.playedWithin))
@@ -238,17 +238,15 @@ class Results:
                 outOfGroupWins, group.played,
                 100.0 * float(outOfGroupWins) / group.played))
 
-            print()
-
 
 def readResults():
     with open('results.txt', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=' ')
         first = True
-        for row in reader:
+        for row in csv.reader(csvfile, delimiter=' '):
             assert 5 == len(row)
             if first:
-                # Skip header.
+                # Make sure we have a header, and skip it.
+                assert 'Round' == row[0]
                 first = False
             else:
                 yield Result(*row)
@@ -258,7 +256,5 @@ if __name__ == '__main__':
     results = Results()
     for result in readResults():
         results.add(result)
-    print('\nTEAMS')
     results.printTable()
-    print('\nGROUPS')
     results.printGroups()

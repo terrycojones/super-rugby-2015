@@ -23,9 +23,11 @@ Two interesting things come from the results (below):
 The conclusion of all this?
 
 Relative to other countries, the Australian teams are doing worse than it
-might first appear (i.e., they're doing a good job of beating each other)
-and the NZ teams are doing even better at beating everyone else than it
-might first appear from their overall record.
+might first appear (i.e., they're doing a good job of beating each other).
+Meanwhile, the NZ teams are doing even better at beating everyone else than
+it might first appear from their overall record. The South African teams
+are doing about as well at beating each other as they are at beating
+others.
 
 ## Results
 

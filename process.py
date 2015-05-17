@@ -128,12 +128,14 @@ class Result:
 
     def groupPov(self, group):
         if group == TEAMS[self.team1]:
-            for_, against, opponent = self.points1, self.points2, TEAMS[self.team2]
+            for_, against, opponent = (self.points1, self.points2,
+                                       TEAMS[self.team2])
         elif group == TEAMS[self.team2]:
-            for_, against, opponent = self.points2, self.points1, TEAMS[self.team1]
+            for_, against, opponent = (self.points2, self.points1,
+                                       TEAMS[self.team1])
         else:
             raise Exception('Group %s was not involved in result %s' %
-                            (name, self))
+                            (group, self))
 
         result = ('won' if for_ > against else (
                   'lost' if for_ < against else 'drew'))
@@ -176,9 +178,7 @@ class Results:
                 ),
                 key=lambda t: self.teams[t].lost,
             ),
-            key=lambda t: self.teams[t].won, reverse=True
-        )
-
+            key=lambda t: self.teams[t].won, reverse=True)
 
     def printTable(self):
         print('                  Overall', end=' ')
@@ -197,7 +197,6 @@ class Results:
                 team.played,
                 team.won, team.lost, team.drew), end=' ')
             for group in sorted(GROUPS):
-                width = len(group) + 3
                 outcomes = team.outcomesByGroup[group]
                 print('  %2d %2d %2d' % (
                     outcomes['won'],
@@ -209,9 +208,9 @@ class Results:
         for groupName in sorted(GROUPS):
             group = self.groups[groupName]
             print('%-*s teams:' % (MAX_GROUP_LEN, groupName))
-            print('  %2d games played (%2d vs other groups, %2d within group)' % (
-                group.played + group.playedWithin,
-                group.played, group.playedWithin))
+            print('  %2d games played (%2d vs other groups, %2d within '
+                  'group)' % (group.played + group.playedWithin,
+                              group.played, group.playedWithin))
 
             # Win/lose/draw record outside group.
             outOfGroupWins = 0

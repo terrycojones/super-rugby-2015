@@ -12,9 +12,9 @@ consider matches that are played between teams from different countries.
 Factoring out how teams from within a country play each other might leave
 you with an indication of the relative strength of the countries.
 
-## Results
-
 I wrote a program to examine this.
+
+## Results
 
 The results (below) show that NZ group teams have won 39/66 (59%) of their
 games overall. But if you look at their record just in out-of-group games,

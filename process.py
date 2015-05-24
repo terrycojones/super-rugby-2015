@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
 
 import csv
+import argparse
 from collections import Counter
+import matplotlib.pyplot as plt
+
+from pylab import rcParams
+rcParams['figure.figsize'] = 12, 8
 
 GROUPS = {'AUS', 'NZ', 'RSA'}
 
 assert 3 == len(GROUPS)
+
+GROUP_COLOR = {
+    'AUS': 'gold',
+    'NZ': 'black',
+    'RSA': 'green',
+}
+
+assert sorted(GROUPS) == sorted(GROUP_COLOR.keys())
 
 MAX_GROUP_LEN = max(len(group) for group in GROUPS)
 
@@ -80,18 +93,45 @@ class Team:
 class Group:
     def __init__(self, name):
         self.name = name
-        self.played = 0
-        self.playedWithin = 0
-        self.outcomes = {group: Counter()
-                         for group in GROUPS if group != name}
+        self.playedInGroup = 0
+        self.playedOutOfGroup = 0
+        self.outcomesInGroup = Counter()
+        self.outcomesOutOfGroup = {group: Counter()
+                                   for group in GROUPS if group != name}
 
-    def addResult(self, result):
-        self.played += 1
+    def addOutOfGroupResult(self, result):
+        self.playedOutOfGroup += 1
         outcome, for_, against, opponent = result.groupPov(self.name)
-        self.outcomes[opponent][outcome] += 1
+        self.outcomesOutOfGroup[opponent][outcome] += 1
 
-    def addWithin(self):
-        self.playedWithin += 1
+    def addInGroupResult(self, result):
+        self.playedInGroup += 2
+        outcome, for_, against, opponent = result.groupPov(self.name)
+        # The groups should match, else we've been called in error.
+        assert self.name == opponent, '%s != %s' % (self.name, opponent)
+        if outcome == 'drew':
+            self.outcomesInGroup['drew'] += 2
+        else:
+            self.outcomesInGroup['won'] += 1
+            self.outcomesInGroup['lost'] += 1
+
+    def overallOutOfGroupOutcomes(self):
+        """
+        Return the overall out-of-group outcomes.
+        """
+        overall = Counter()
+        for outcomes in self.outcomesOutOfGroup.values():
+            overall += outcomes
+        return overall
+
+    def overallOutcomes(self):
+        """
+        Return the overall outcomes, of within- and without-group matches.
+        """
+        overall = Counter()
+        for outcomes in self.outcomesOutOfGroup.values():
+            overall += outcomes
+        return overall + self.outcomesInGroup
 
 
 class Result:
@@ -146,25 +186,35 @@ class Result:
         return self.group1 == self.group2
 
     def __str__(self):
-        return 'Round %d: %s %d %s %d' % (
+        return 'Round %d: %s (%s) %d vs %s (%s) %d' % (
             self.round,
-            self.team1, self.points1,
-            self.team2, self.points2)
+            self.team1, TEAMS[self.team1], self.points1,
+            self.team2, TEAMS[self.team2], self.points2)
 
 
 class Results:
-    def __init__(self):
+
+    FIRST_PLOT_ROUND = 5
+
+    def __init__(self, filename, maxRounds=None):
+        self._filename = filename
+        self._maxRounds = maxRounds
+        self.rounds = 0
         self.teams = {name: Team(name) for name in TEAMS}
         self.groups = {name: Group(name) for name in GROUPS}
+        self.roundStats = {}
+        for name in GROUPS:
+            self.roundStats[name + '-overall-win-fraction'] = []
+            self.roundStats[name + '-out-of-group-win-fraction'] = []
 
     def add(self, result):
         self.teams[result.team1].addResult(result)
         self.teams[result.team2].addResult(result)
         if result.withinGroup():
-            self.groups[result.group1].addWithin()
+            self.groups[result.group1].addInGroupResult(result)
         else:
-            self.groups[result.group1].addResult(result)
-            self.groups[result.group2].addResult(result)
+            self.groups[result.group1].addOutOfGroupResult(result)
+            self.groups[result.group2].addOutOfGroupResult(result)
 
     def sortTeams(self):
         return sorted(
@@ -181,6 +231,7 @@ class Results:
             key=lambda t: self.teams[t].won, reverse=True)
 
     def printTable(self):
+        print('Results through round %d' % self.rounds, end='\n\n')
         print('                  Overall', end=' ')
         for group in sorted(GROUPS):
             print('   %-7s' % ('vs ' + group), end=' ')
@@ -209,52 +260,125 @@ class Results:
             group = self.groups[groupName]
             print('\n%-*s teams:' % (MAX_GROUP_LEN, groupName))
             print('  %2d games played (%2d vs other groups, %2d within '
-                  'group)' % (group.played + group.playedWithin,
-                              group.played, group.playedWithin))
+                  'group)' % (group.playedOutOfGroup + group.playedInGroup,
+                              group.playedOutOfGroup, group.playedInGroup))
 
             # Win/lose/draw record outside group.
-            outOfGroupWins = 0
             for otherGroupName in sorted(GROUPS):
                 if groupName != otherGroupName:
                     print('  vs %-3s  W  L  D' % otherGroupName)
-                    outcomes = group.outcomes[otherGroupName]
-                    outOfGroupWins += outcomes['won']
+                    outcomes = group.outcomesOutOfGroup[otherGroupName]
                     print('         %2d %2d %2d' % (
                         outcomes['won'],
                         outcomes['lost'],
                         outcomes['drew']))
 
             # Overall wins/losses/draws for teams in this group.
-            outcomes = Counter()
-            for team in self.teams.values():
-                if team.group == groupName:
-                    outcomes += team.outcomes
+            outcomes = group.overallOutcomes()
             played = sum(outcomes.values())
             print('  Wins overall: %d/%d (%.2f%%)' % (
                 outcomes['won'], played,
                 100.0 * float(outcomes['won']) / played))
 
+            # Out of group wins/losses/draws for teams in this group.
+            outcomes = group.overallOutOfGroupOutcomes()
+            played = sum(outcomes.values())
             print('  Wins out-of-group: %d/%d (%.2f%%)' % (
-                outOfGroupWins, group.played,
-                100.0 * float(outOfGroupWins) / group.played))
+                outcomes['won'], played,
+                100.0 * float(outcomes['won']) / played))
 
-
-def readResults():
-    with open('results.txt', newline='') as csvfile:
+    def read(self, printResults):
+        maxRounds = self._maxRounds
         first = True
-        for row in csv.reader(csvfile, delimiter=' '):
-            assert 5 == len(row)
-            if first:
-                # Make sure we have a header, and skip it.
-                assert 'Round' == row[0]
-                first = False
-            else:
-                yield Result(*row)
+        currentRound = 1
+        with open(self._filename, newline='') as csvfile:
+            for row in csv.reader(csvfile, delimiter=' '):
+                assert 5 == len(row)
+                if first:
+                    # Make sure we have a header, and skip it.
+                    assert 'Round' == row[0]
+                    first = False
+                else:
+                    result = Result(*row)
+                    if maxRounds is not None and result.round > maxRounds:
+                        break
+                    else:
+                        if printResults:
+                            print(result)
+                        self.add(result)
+                        if result.round != currentRound:
+                            self.endRound()
+                            currentRound = result.round
+        self.endRound()
+
+    def endRound(self):
+        self.rounds += 1
+        for groupName in sorted(GROUPS):
+            group = self.groups[groupName]
+
+            # Overall wins/losses/draws for teams in this group.
+            outcomes = group.overallOutcomes()
+            played = sum(outcomes.values())
+            self.roundStats[groupName + '-overall-win-fraction'].append(
+                float(outcomes['won']) / played)
+
+            # Out of group wins/losses/draws for teams in this group.
+            outcomes = group.overallOutOfGroupOutcomes()
+            played = sum(outcomes.values())
+            self.roundStats[groupName + '-out-of-group-win-fraction'].append(
+                float(outcomes['won']) / played)
+
+    def plot(self):
+        if self.FIRST_PLOT_ROUND > self.rounds:
+            print('Cannot plot, we only have %d rounds of data.' % self.rounds)
+            return
+
+        x = list(range(self.FIRST_PLOT_ROUND, self.rounds + 1))
+        handles = []
+        for groupName in sorted(GROUPS):
+            stats = self.roundStats[groupName + '-overall-win-fraction']
+            handles.append(
+                plt.plot(x, stats[self.FIRST_PLOT_ROUND - 1:],
+                         label='%s overall' % groupName, linewidth=2,
+                         color=GROUP_COLOR[groupName])[0])
+            stats = self.roundStats[groupName + '-out-of-group-win-fraction']
+            handles.append(
+                plt.plot(x, stats[self.FIRST_PLOT_ROUND - 1:],
+                         label='%s out-of-group' % groupName, linewidth=2,
+                         color=GROUP_COLOR[groupName], linestyle='dashed')[0])
+        plt.title('Overall vs out-of-group win fraction', fontsize=20)
+        plt.legend(handles=handles)
+        plt.ylim(0.0, 1.0)
+        plt.xlim(self.FIRST_PLOT_ROUND, self.rounds)
+        plt.xticks(x)
+        plt.yticks([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        plt.xlabel('Round', fontsize=16)
+        plt.ylabel('Win fraction', fontsize=16)
+        plt.grid()
+        plt.show()
 
 
 if __name__ == '__main__':
-    results = Results()
-    for result in readResults():
-        results.add(result)
+    parser = argparse.ArgumentParser(
+        description='Print statistics about the 2015 Super Rugby competition')
+
+    parser.add_argument(
+        '--rounds', type=int,
+        help='Only consider games up to (and including) the given round.')
+
+    parser.add_argument(
+        '--printResults', action='store_true', default=False,
+        help='If True, print individual match results.')
+
+    parser.add_argument(
+        '--plot', action='store_true', default=False,
+        help=('If True, plot round-by-round overall and out-of-group win '
+              'fractions'))
+
+    args = parser.parse_args()
+    results = Results('results.txt', args.rounds)
+    results.read(args.printResults)
     results.printTable()
     results.printGroups()
+    if args.plot:
+        results.plot()

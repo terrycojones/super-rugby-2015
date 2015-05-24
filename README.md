@@ -33,8 +33,22 @@ It doesn't give any indication about whether (e.g.) New Zealand is likely
 to beat Australia because the players in the teams that are winning few
 games are much less likely to be picked for their national sides.
 
-The program's textual and graphic output (as of 2015-05-24, following Round
-15) are shown below:
+The program's output (as of 2015-05-24, following Round 15) are shown
+below.
+
+The graph shows how the overall win fraction versus the out-of-group win
+fraction has changed over time for each of the countries. Only rounds 5
+onwards are shown as it took that long to have enough data for the general
+pattern to stabilize.
+
+<img src="graph.png"/>
+
+### Details
+
+Here is the detailed output of the program with results broken down by
+group. Note that the team results table is not ordered by competition
+points, but by number of wins.
+
 
 ```
 Results through round 15
@@ -85,21 +99,31 @@ RSA teams:
   Wins out-of-group: 17/35 (48.57%)
 ```
 
-In the graph below, you can see how the overall versus the out-of-group win
-fraction has changed over time. Only rounds 5 onwards are shown as it took
-that long to have enough data for the general pattern to stabilize.
+## Technical stuff
 
-<img src="graph.png"/>
+This repo contains a results file (`results.txt`) and a Python program to
+print stats and make a plot (`process.py`).
 
-## Details
+Neither the program nor its input have been fully checked for accuracy yet!
+I'm fairly certain they're correct.
 
-The table above is not ordered by competition points, but on number of
-wins.
+Usage is as follows:
 
-This repo contains a results file and a Python program to print some
-stats.  *Note: Neither has been fully checked for accuracy yet!*
+```sh
+$ ./process.py --help
+usage: process.py [-h] [--rounds ROUNDS] [--printResults] [--plot]
 
-The input comes from `results.txt`, which must have 5 fields per line:
-`round`, `team1`, `points1`, `team2`, and `points2`. The round numbers
-*must* be non-decreasing in order for end-of-round statistics gathering to
-work correctly.
+Print statistics about the 2015 Super Rugby competition
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --rounds ROUNDS  Only consider games up to (and including) the given round.
+  --printResults   If True, print individual match results.
+  --plot           If True, plot round-by-round overall and out-of-group win
+                   fractions
+```
+
+The `results.txt` file must have 5 fields per line: `round`, `team1`,
+`points1`, `team2`, and `points2`. The round numbers *must* be
+non-decreasing so that the end-of-round statistics gathering will work
+correctly.

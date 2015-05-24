@@ -4,8 +4,8 @@ If you take a look at
 [the 2015 Super Rugby table](http://www.smh.com.au/rugby-union/super-rugby/ladder),
 it's immediately clear that NZ teams are doing extremely well.
 
-However, the overall table doesn't tell you how teams from one country are
-doing against the teams from the other two countries.
+However, the overall competition table doesn't tell you how teams from one
+country are doing against the teams from the other two countries.
 
 I was interested to see how the three countries are doing when we only
 consider matches that are played between teams from different countries.
@@ -22,7 +22,7 @@ the percentage goes up: they've won 25/38 (65.8%). In contrast, Australian
 group teams have won 27/65 (41.5%) of their games overall, but in
 out-of-group have won only 11/33 (33.3%).
 
-So the Australian record is worse than it would appear if you just
+I.e., the Australian record is worse than it would appear if you just
 considered their overall win/loss percentage.  Meanwhile, the NZ teams are
 doing even better at beating everyone else than it might first appear from
 their overall record. Meanwhile, the South African teams are doing about as
@@ -46,13 +46,22 @@ pattern to stabilize.
 
 ### Details
 
-Here is the detailed output of the program with results broken down by
-group. Note that the team results table is not ordered by competition
-points, but by number of wins.
+Below is the detailed output of the program with results broken down by
+group. Some notes:
 
-It's interesting to note that the NZ teams have played significantly more
-(38) out-of-group games than RSA (35) or AUS (33). The NZ teams are largely
-matched against each other in the remaining competition rounds.
+1. The team results table is not ordered by competition points, but by
+number of wins.
+
+1. It's interesting to see that AUS teams are doing better against NZ teams (7
+wins out of 18) than they are against RSA teams (4 wins out of 15).
+
+1. RSA teams have won 11 out of 15 matches against AUS teams, but only 6
+out of 20 against NZ teams.
+
+1. It's also interesting to note that the NZ teams have played
+significantly more (38) out-of-group games than RSA (35) or AUS (33). The
+NZ teams are largely matched against each other in the remaining
+competition rounds.
 
 
 ```

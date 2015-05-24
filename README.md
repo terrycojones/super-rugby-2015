@@ -49,16 +49,16 @@ pattern to stabilize.
 Below is the detailed output of the program with results broken down by
 group. Some notes:
 
-1. The team results table is not ordered by competition points, but by
+* The team results table is not ordered by competition points, but by
 number of wins.
 
-1. It's interesting to see that AUS teams are doing better against NZ teams (7
+* It's interesting to see that AUS teams are doing better against NZ teams (7
 wins out of 18) than they are against RSA teams (4 wins out of 15).
 
-1. RSA teams have won 11 out of 15 matches against AUS teams, but only 6
+* RSA teams have won 11 out of 15 matches against AUS teams, but only 6
 out of 20 against NZ teams.
 
-1. It's also interesting to note that the NZ teams have played
+* It's also interesting to note that the NZ teams have played
 significantly more (38) out-of-group games than RSA (35) or AUS (33). The
 NZ teams are largely matched against each other in the remaining
 competition rounds.

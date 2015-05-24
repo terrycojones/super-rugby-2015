@@ -2,40 +2,41 @@
 
 If you take a look at
 [the 2015 Super Rugby table](http://www.smh.com.au/rugby-union/super-rugby/ladder),
-it's immediately clear that NZ teams are doing extremely well.
+it's immediately clear that NZ teams are doing extremely well.  But the
+overall competition table doesn't tell us how teams from one country are
+doing against the teams from the other two countries.
 
-However, the overall competition table doesn't tell you how teams from one
-country are doing against the teams from the other two countries.
-
-I was interested to see how the three countries are doing when we only
-consider matches that are played between teams from different countries.
-Factoring out how teams from within a country play each other might leave
-you with an indication of the relative strength of the countries.
+I was interested to see what things looked like when we only consider
+matches that are played between teams from different countries. Factoring
+out how teams from within a country play each other might give us a clearer
+picture of the relative strengths of the countries.
 
 I wrote a program to examine this.
 
 ## Results
 
-The results (below) show that NZ group teams have won 39/66 (59%) of their
-games overall. But if you look at their record just in out-of-group games,
-the percentage goes up: they've won 25/38 (65.8%). In contrast, Australian
-group teams have won 27/65 (41.5%) of their games overall, but in
-out-of-group have won only 11/33 (33.3%).
+The results (see below) show that NZ group teams have won 39/66 (59%) of
+their games overall. But if you look at their record just in out-of-group
+games, the percentage goes up: they've won 25/38 (65.8%). In contrast,
+Australian group teams have won 27/65 (41.5%) of their games overall, but
+in out-of-group have won only 11/33 (33.3%).
 
-I.e., the Australian record is worse than it would appear if you just
-considered their overall win/loss percentage.  Meanwhile, the NZ teams are
+I.e., the Australian record is worse than it appears if you just consider
+their overall competition win/loss percentage.  Meanwhile, the NZ teams are
 doing even better at beating everyone else than it might first appear from
 their overall record. Meanwhile, the South African teams are doing about as
-well beating others as they are overall.
+well beating teams from other countries others as they are overall.
 
-This gives us some idea of the overall strength of rugby in the countries.
-It doesn't give any indication about whether (e.g.) New Zealand is likely
-to beat Australia in a test because the players in the Super Rugby teams
-that are winning few games are much less likely to be picked for their
-national sides.
+This gives us some idea of the *overall strength of rugby* in the
+countries: NZ well ahead of RSA, and RSA well ahead of AUS.
 
-The program's output (as of 2015-05-24, following Round 15) are shown
-below.
+However, it doesn't give any indication about whether (e.g.) New Zealand is
+likely to beat Australia in a test because the players in the Super Rugby
+teams that are winning few games are much less likely to be picked for
+their national sides.
+
+The program's graphical and textual output (as of 2015-05-24, following
+Round 15) are shown below.
 
 The graph shows how the overall win fraction versus the out-of-group win
 fraction has changed over time for each of the countries. Only rounds 5

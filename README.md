@@ -30,8 +30,9 @@ well beating others as they are overall.
 
 This gives us some idea of the overall strength of rugby in the countries.
 It doesn't give any indication about whether (e.g.) New Zealand is likely
-to beat Australia because the players in the teams that are winning few
-games are much less likely to be picked for their national sides.
+to beat Australia in a test because the players in the Super Rugby teams
+that are winning few games are much less likely to be picked for their
+national sides.
 
 The program's output (as of 2015-05-24, following Round 15) are shown
 below.
@@ -48,6 +49,10 @@ pattern to stabilize.
 Here is the detailed output of the program with results broken down by
 group. Note that the team results table is not ordered by competition
 points, but by number of wins.
+
+It's interesting to note that the NZ teams have played significantly more
+(38) out-of-group games than RSA (35) or AUS (33). The NZ teams are largely
+matched against each other in the remaining competition rounds.
 
 
 ```

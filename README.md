@@ -15,11 +15,11 @@ I wrote a program to examine this.
 
 ## Results
 
-The results (see below) show that NZ group teams have won 41/70 (58.6%) of
+The results (see below) show that NZ group teams have won 44/75 (58.7%) of
 their games overall. But if you look at their record just in out-of-group
-games, the percentage goes up: they've won 25/38 (65.8%). In contrast,
-Australian group teams have won 29/70 (41.4%) of their games overall, but
-in out-of-group have won only 12/36 (33.3%).
+games, the percentage goes up: they've won 26/39 (66.6%). In contrast,
+Australian group teams have won 32/75 (42.7%) of their games overall, but
+in out-of-group have won only 14/39 (35.9%).
 
 I.e., the Australian record is worse than it appears if you just consider
 their overall competition win/loss percentage.  Meanwhile, the NZ teams are
@@ -36,7 +36,7 @@ teams that are winning few games are much less likely to be picked for
 their national sides.
 
 The program's graphical and textual output (as of 2015-05-24, following
-Round 16) are shown below.
+Round 17) are shown below.
 
 The graph shows how the overall win fraction versus the out-of-group win
 fraction has changed over time for each of the countries. Only rounds 5
@@ -53,59 +53,56 @@ group. Some notes:
 * The team results table is not ordered by competition points, but by
 number of wins.
 
-* It's interesting to see that AUS teams are doing better against NZ teams
-(7 wins out of 18) than they are against RSA teams (5 wins out of 18).
-
 * RSA teams have won 13 out of 18 matches against AUS teams, but only 6
 out of 20 against NZ teams.
 
 ```
-Results through round 16
+Results through round 17
 
                   Overall    vs AUS     vs NZ      vs RSA
 Team         P    W  L  D    W  L  D    W  L  D    W  L  D
- HUR (NZ) : 14   12  2  0    3  1  0    5  1  0    4  0  0
- HIG (NZ) : 14   10  4  0    3  1  0    4  2  0    3  1  0
- STO (RSA): 14   10  4  0    4  0  0    1  3  0    5  1  0
- CHF (NZ) : 14    9  5  0    2  1  0    4  3  0    3  1  0
- WAR (AUS): 14    9  5  0    5  2  0    3  1  0    1  2  0
- LIO (RSA): 15    9  6  0    3  1  0    2  2  0    4  3  0
- BRU (AUS): 14    8  6  0    4  3  0    1  2  0    3  1  0
- BUL (RSA): 14    7  7  0    2  1  0    1  3  0    4  3  0
- CRU (NZ) : 14    7  7  0    1  2  0    3  4  0    3  1  0
- REB (AUS): 14    6  8  0    3  4  0    3  1  0    0  3  0
+ HUR (NZ) : 15   13  2  0    3  1  0    6  1  0    4  0  0
+ STO (RSA): 15   10  4  1    4  0  0    1  3  0    5  1  1
+ CHF (NZ) : 15   10  5  0    3  1  0    4  3  0    3  1  0
+ HIG (NZ) : 15   10  5  0    3  1  0    4  3  0    3  1  0
+ WAR (AUS): 15   10  5  0    5  2  0    3  1  0    2  2  0
+ BRU (AUS): 15    9  6  0    5  3  0    1  2  0    3  1  0
+ LIO (RSA): 16    9  6  1    3  1  0    2  2  0    4  3  1
+ CRU (NZ) : 15    8  7  0    1  2  0    4  4  0    3  1  0
+ BUL (RSA): 15    7  8  0    2  2  0    1  3  0    4  3  0
+ REB (AUS): 15    7  8  0    3  4  0    3  1  0    1  3  0
  SHA (RSA): 15    6  9  0    3  1  0    1  3  0    2  5  0
- CHT (RSA): 14    4 10  0    1  2  0    1  3  0    2  5  0
- RED (AUS): 14    4 10  0    3  4  0    0  3  0    1  3  0
- BLU (NZ) : 14    3 11  0    2  2  0    0  6  0    1  3  0
- FOR (AUS): 14    2 12  0    2  4  0    0  4  0    0  4  0
+ CHT (RSA): 15    4 11  0    1  3  0    1  3  0    2  5  0
+ RED (AUS): 15    4 11  0    3  4  0    0  4  0    1  3  0
+ BLU (NZ) : 15    3 12  0    2  2  0    0  7  0    1  3  0
+ FOR (AUS): 15    2 13  0    2  5  0    0  4  0    0  4  0
 
 AUS teams:
-  70 games played (36 vs other groups, 34 within group)
+  75 games played (39 vs other groups, 36 within group)
   vs NZ   W  L  D
-          7 11  0
+          7 12  0
   vs RSA  W  L  D
-          5 13  0
-  Wins overall: 29/70 (41.43%)
-  Wins out-of-group: 12/36 (33.33%)
+          7 13  0
+  Wins overall: 32/75 (42.67%)
+  Wins out-of-group: 14/39 (35.90%)
 
 NZ  teams:
-  70 games played (38 vs other groups, 32 within group)
+  75 games played (39 vs other groups, 36 within group)
   vs AUS  W  L  D
-         11  7  0
+         12  7  0
   vs RSA  W  L  D
          14  6  0
-  Wins overall: 41/70 (58.57%)
-  Wins out-of-group: 25/38 (65.79%)
+  Wins overall: 44/75 (58.67%)
+  Wins out-of-group: 26/39 (66.67%)
 
 RSA teams:
-  72 games played (38 vs other groups, 34 within group)
+  76 games played (40 vs other groups, 36 within group)
   vs AUS  W  L  D
-         13  5  0
+         13  7  0
   vs NZ   W  L  D
           6 14  0
-  Wins overall: 36/72 (50.00%)
-  Wins out-of-group: 19/38 (50.00%)
+  Wins overall: 36/76 (47.37%)
+  Wins out-of-group: 19/40 (47.50%)
 ```
 
 ## Technical stuff

@@ -120,18 +120,23 @@ Usage is as follows:
 ```sh
 $ ./process.py --help
 usage: process.py [-h] [--rounds ROUNDS] [--printResults] [--plot]
+                  [--firstPlotRound FIRSTPLOTROUND]
 
-Print statistics about the 2015 Super Rugby competition
+Print statistics about the 2015 Super Rugby competition.
 
 optional arguments:
-  -h, --help       show this help message and exit
-  --rounds ROUNDS  Only consider games up to (and including) the given round.
-  --printResults   If True, print individual match results.
-  --plot           If True, plot round-by-round overall and out-of-group win
-                   fractions
+  -h, --help            show this help message and exit
+  --rounds ROUNDS       Only consider games up to (and including) the given
+                        round.
+  --printResults        If True, print individual match results.
+  --plot                If True, plot a graph showing round-by-round overall
+                        and out-of-group win fractions.
+  --firstPlotRound FIRSTPLOTROUND
+                        The first round of results to show when --plot is
+                        used.
 ```
 
 The `results.txt` file must have 5 fields per line: `round`, `team1`,
-`points1`, `team2`, and `points2`. The round numbers *must* be
+`points1`, `team2`, and `points2`. The `round` numbers *must* be
 non-decreasing so that the end-of-round statistics gathering will work
 correctly.

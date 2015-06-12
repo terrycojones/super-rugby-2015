@@ -52,6 +52,11 @@ for team in TEAMS:
     assert TEAMS[team] in GROUPS
 
 
+# The first round of results to show when plotting. It takes 5 rounds for
+# the overall pattern to settle down.
+FIRST_PLOT_ROUND = 5
+
+
 class Team:
     def __init__(self, name):
         self.name = name
@@ -194,8 +199,6 @@ class Result:
 
 class Results:
 
-    FIRST_PLOT_ROUND = 5
-
     def __init__(self, filename, maxRounds=None):
         self._filename = filename
         self._maxRounds = maxRounds
@@ -328,28 +331,29 @@ class Results:
             self.roundStats[groupName + '-out-of-group-win-fraction'].append(
                 float(outcomes['won']) / played)
 
-    def plot(self):
-        if self.FIRST_PLOT_ROUND > self.rounds:
-            print('Cannot plot, we only have %d rounds of data.' % self.rounds)
+    def plot(self, firstPlotRound=FIRST_PLOT_ROUND):
+        if firstPlotRound > self.rounds:
+            print('Cannot plot %d rounds, we only have %d rounds of data.' %
+                  (firstPlotRound, self.rounds))
             return
 
-        x = list(range(self.FIRST_PLOT_ROUND, self.rounds + 1))
+        x = list(range(firstPlotRound, self.rounds + 1))
         handles = []
         for groupName in sorted(GROUPS):
             stats = self.roundStats[groupName + '-overall-win-fraction']
             handles.append(
-                plt.plot(x, stats[self.FIRST_PLOT_ROUND - 1:],
+                plt.plot(x, stats[firstPlotRound - 1:],
                          label='%s overall' % groupName, linewidth=2,
                          color=GROUP_COLOR[groupName])[0])
             stats = self.roundStats[groupName + '-out-of-group-win-fraction']
             handles.append(
-                plt.plot(x, stats[self.FIRST_PLOT_ROUND - 1:],
+                plt.plot(x, stats[firstPlotRound - 1:],
                          label='%s out-of-group' % groupName, linewidth=2,
                          color=GROUP_COLOR[groupName], linestyle='dashed')[0])
         plt.title('Overall vs out-of-group win fraction', fontsize=20)
         plt.legend(handles=handles)
         plt.ylim(0.0, 1.0)
-        plt.xlim(self.FIRST_PLOT_ROUND, self.rounds)
+        plt.xlim(firstPlotRound, self.rounds)
         plt.xticks(x)
         plt.yticks([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
         plt.xlabel('Round', fontsize=16)
@@ -360,7 +364,7 @@ class Results:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Print statistics about the 2015 Super Rugby competition')
+        description='Print statistics about the 2015 Super Rugby competition.')
 
     parser.add_argument(
         '--rounds', type=int,
@@ -372,8 +376,12 @@ if __name__ == '__main__':
 
     parser.add_argument(
         '--plot', action='store_true', default=False,
-        help=('If True, plot round-by-round overall and out-of-group win '
-              'fractions'))
+        help=('If True, plot a graph showing round-by-round overall and '
+              'out-of-group win fractions.'))
+
+    parser.add_argument(
+        '--firstPlotRound', type=int, default=FIRST_PLOT_ROUND,
+        help='The first round of results to show when --plot is used.')
 
     args = parser.parse_args()
     results = Results('results.txt', args.rounds)
@@ -381,4 +389,4 @@ if __name__ == '__main__':
     results.printTable()
     results.printGroups()
     if args.plot:
-        results.plot()
+        results.plot(args.firstPlotRound)

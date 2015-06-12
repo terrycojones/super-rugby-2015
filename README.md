@@ -3,7 +3,7 @@
 If you take a look at
 [the 2015 Super Rugby table](http://www.smh.com.au/rugby-union/super-rugby/ladder),
 it's immediately clear that NZ teams are doing extremely well.  But the
-overall competition table doesn't tell us how teams from one country are
+overall competition table doesn't show us how teams from one country are
 doing against the teams from the other two countries.
 
 I was interested to see what things looked like when we only consider
@@ -15,11 +15,11 @@ I wrote a program to examine this.
 
 ## Results
 
-The results (see below) show that NZ group teams have won 44/75 (58.7%) of
-their games overall. But if you look at their record just in out-of-group
-games, the percentage goes up: they've won 26/39 (66.6%). In contrast,
-Australian group teams have won 32/75 (42.7%) of their games overall, but
-in out-of-group have won only 14/39 (35.9%).
+The results (see the Details section below) show that NZ group teams have
+won 44/75 (58.7%) of their games overall. But if you look at their record
+just in out-of-group games, the percentage goes up: they've won 26/39
+(66.6%). In contrast, Australian group teams have won 32/75 (42.7%) of
+their games overall, but in out-of-group have won only 14/39 (35.9%).
 
 I.e., the Australian record is worse than it appears if you just consider
 their overall competition win/loss percentage.  Meanwhile, the NZ teams are
@@ -27,13 +27,13 @@ doing even better at beating everyone else than it might first appear from
 their overall record. Meanwhile, the South African teams are doing about as
 well beating teams from other countries others as they are overall.
 
-This gives us some idea of the *overall strength of rugby* in the
+This gives us some idea of the *overall strength* of rugby in the
 countries: NZ well ahead of RSA, and RSA well ahead of AUS.
 
-However, it doesn't give any indication about whether (e.g.) New Zealand is
-likely to beat Australia in a test because the players in the Super Rugby
-teams that are winning few games are much less likely to be picked for
-their national sides.
+However, it doesn't give any indication about whether, for example, New
+Zealand is likely to beat Australia in a test. That's because the players
+in the Super Rugby teams that are winning very few games are much less
+likely to be picked for their national sides.
 
 The program's graphical and textual output (as of 2015-05-24, following
 Round 17) are shown below.
@@ -48,13 +48,7 @@ pattern to stabilize.
 ### Details
 
 Below is the detailed output of the program with results broken down by
-group. Some notes:
-
-* The team results table is not ordered by competition points, but by
-number of wins.
-
-* RSA teams have won 13 out of 18 matches against AUS teams, but only 6
-out of 20 against NZ teams.
+group.
 
 ```
 Results through round 17
@@ -104,6 +98,14 @@ RSA teams:
   Wins overall: 36/76 (47.37%)
   Wins out-of-group: 19/40 (47.50%)
 ```
+
+Some notes:
+
+* The team results table is not ordered by competition points, but by
+number of wins.
+
+* RSA teams have won 13 out of 18 matches against AUS teams, but only 6
+out of 20 against NZ teams.
 
 ## Technical stuff
 

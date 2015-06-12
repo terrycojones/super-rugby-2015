@@ -119,21 +119,21 @@ Usage is as follows:
 
 ```sh
 $ ./process.py --help
-usage: process.py [-h] [--rounds ROUNDS] [--printResults] [--plot]
-                  [--firstPlotRound FIRSTPLOTROUND]
+usage: process.py [-h] [--rounds ROUND] [--printResults] [--plot]
+                  [--firstPlotRound ROUND]
 
 Print statistics about the 2015 Super Rugby competition.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --rounds ROUNDS       Only consider games up to (and including) the given
-                        round.
-  --printResults        If True, print individual match results.
-  --plot                If True, plot a graph showing round-by-round overall
-                        and out-of-group win fractions.
-  --firstPlotRound FIRSTPLOTROUND
-                        The first round of results to show when --plot is
-                        used.
+  --rounds ROUND        Only consider games up to (and including) the given
+                        round. Default is to use data from all rounds.
+  --printResults        Print individual match results (default: False).
+  --plot                Plot a graph showing round-by-round overall and out-
+                        of-group win fractions (default: False).
+  --firstPlotRound ROUND
+                        The first round of results to show when --plot is used
+                        (default: 5).
 ```
 
 The `results.txt` file must have 5 fields per line: `round`, `team1`,

@@ -35,7 +35,7 @@ Zealand is likely to beat Australia in a test. That's because the players
 in the Super Rugby teams that are winning very few games are much less
 likely to be picked for their national sides.
 
-The program's graphical and textual output (as of 2015-05-24, following
+The program's graphical and textual output (as of June 7 2015, following
 Round 17) are shown below.
 
 The graph shows how the overall win fraction versus the out-of-group win

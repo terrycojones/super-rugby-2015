@@ -367,21 +367,24 @@ if __name__ == '__main__':
         description='Print statistics about the 2015 Super Rugby competition.')
 
     parser.add_argument(
-        '--rounds', type=int,
-        help='Only consider games up to (and including) the given round.')
+        '--rounds', type=int, metavar='ROUND',
+        help='Only consider games up to (and including) the given round. '
+        'Default is to use data from all rounds.')
 
     parser.add_argument(
         '--printResults', action='store_true', default=False,
-        help='If True, print individual match results.')
+        help='Print individual match results (default: %(default)s).')
 
     parser.add_argument(
         '--plot', action='store_true', default=False,
-        help=('If True, plot a graph showing round-by-round overall and '
-              'out-of-group win fractions.'))
+        help=('Plot a graph showing round-by-round overall and '
+              'out-of-group win fractions (default: %(default)s).'))
 
     parser.add_argument(
         '--firstPlotRound', type=int, default=FIRST_PLOT_ROUND,
-        help='The first round of results to show when --plot is used.')
+        metavar='ROUND',
+        help=('The first round of results to show when --plot is used '
+              '(default: %(default)s).'))
 
     args = parser.parse_args()
     results = Results('results.txt', args.rounds)

@@ -2,9 +2,9 @@
 
 If you take a look at
 [the 2015 Super Rugby table](http://www.smh.com.au/rugby-union/super-rugby/ladder),
-it's immediately clear that NZ teams are doing extremely well.  But the
-overall competition table doesn't show us how teams from one country are
-doing against the teams from the other two countries.
+it's immediately clear that NZ teams have done extremely well.  But the
+overall competition table doesn't show us how teams from one country did
+against the teams from the other two countries.
 
 I was interested to see what things looked like when we only consider
 matches that are played between teams from different countries. Factoring

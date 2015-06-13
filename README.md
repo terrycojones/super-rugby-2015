@@ -24,8 +24,8 @@ their games overall, but in out-of-group have won only 14/40 (35%).
 I.e., the Australian record is worse than it appears if you just consider
 their overall competition win/loss percentage.  Meanwhile, the NZ teams are
 doing even better at beating everyone else than it might first appear from
-their overall record. Meanwhile, the South African teams are doing about as
-well beating teams from other countries others as they are overall.
+their overall record. The South African teams have done exactly as well
+beating teams from other countries others as they have overall.
 
 This gives us some idea of the *overall strength* of rugby in the
 countries: NZ well ahead of RSA, and RSA well ahead of AUS.
@@ -35,8 +35,8 @@ Zealand is likely to beat Australia in a test. That's because the players
 in the Super Rugby teams that are winning very few games are much less
 likely to be picked for their national sides.
 
-The program's graphical and textual output (as of June 13 2015, following
-Round 18) are shown below.
+The program's graphical and textual output following the final round (18)
+are shown below.
 
 The graph shows how the overall win fraction versus the out-of-group win
 fraction has changed over time for each of the countries. Only rounds 5
@@ -104,11 +104,11 @@ Some notes:
 * The team results table is not ordered by competition points, but by
 number of wins.
 
-* RSA teams have won 13 out of 20 matches against AUS teams, but only 6
-out of 20 against NZ teams.
+* RSA teams won 13 out of 20 matches against AUS teams, but only 6 out of
+20 against NZ teams.
 
-* AUS has an equal record against NZ and RSA, 7 games won out of 20 in both
-cases.
+* AUS teams have an equal record against NZ and RSA teams: 7 games won out
+of 20 in both cases.
 
 ## Technical stuff
 
